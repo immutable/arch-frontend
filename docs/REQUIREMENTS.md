@@ -42,17 +42,16 @@ Priority Definitions
 | US_09 | As a token holder I wish to enter the contract address, tokenId and L2 recipient address of the NFT I wish to deposit from L1                              | P1       |
 | US_13 | As a token holder, I wish to check if my NFT on L2 can be bridged back to L1 so that I do not attempt to bridge an L2 NFT which will fail during bridging  | P1       |
 | US_14 | As a token holder, I wish to enter my L2 Token Address, L2 Token Ids and L1 Recipient so that I can initate withdrawal of my NFTs from L2                  | P1       |
-| US_16 | As a token holder, I wish to execute withdraw on L1 so that I get ownership of the NFTs I withdrew from L2                                                 | P1       |
-| US_17 | As a token holder, I want a link to Github for the bridge contracts so that I can self verify its trustworthiness                                          | P1       |
-| US_15 | As a token holder, I wish to know when my NFTs bridged from L2 to L1 are ready to be withdrawn on L1                                                       | P2       |
-| US_10 | As a token holder I wish to be informed of the status of my deposit so that I know the state of my assets                                                  | P2       |
-| US_03 | As a token holder, I wish to view my L1 assets on the Arch interface Frontend Interface so that I can design which assets I want to deposit                | P3       |
+| US_16 | As a token holder, I wish to execute withdraw on L1 so that I get ownership of the NFTs I withdrew from L2, completing the withdrawal process              | P1       |
+| US_17 | As a token holder, I want a link to Github and Etherscan/Voyager for the bridge contracts so that I can self verify its trustworthiness                    | P1       |
 | US_07 | As a token holder, I wish to connect Ethereum Wallet using WalletConnect, so that I can sign L1 transactions such as 'deposit' with my non-Metamask wallet | P3       |
 | US_11 | As a token holder, I wish to initiate cancel deposit so that I begin torecover my asset if my deposit fails                                                | P3       |
 | US_12 | As a token holder, I wish to complete cancel deposit so that I can recover my asset if my deposit fails                                                    | P3       |
 | US_01 | As a project owner, I wish to register my L1 and L2 contracts with the Bridge Registry, so that token holders can begin to bridge their assets.            | P4       |
 | US_04 | As a token holder, I wish to view my L1 assets on the Arch Frontend so that I can decide which assets I want to deposit                                    | P4       |
 | US_05 | As a token holder, I wish to view my L2 assets on the Arch Frontend so that I can decide which assets I want to withdraw                                   | P4       |
+| US_15 | As a token holder, I wish to know when my NFTs bridged from L2 to L1 are ready to be withdrawn on L1                                                       | P4       |
+| US_10 | As a token holder I wish to be informed of the status of my deposit so that I know the state of my assets                                                  | P4       |
 
 ## Reasoning
 
