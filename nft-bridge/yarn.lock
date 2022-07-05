@@ -9863,10 +9863,10 @@ use-sync-external-store@1.1.0:
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.1.0.tgz#3343c3fe7f7e404db70f8c687adf5c1652d34e82"
   integrity sha512-SEnieB2FPKEVne66NpXPd1Np4R1lTNKfjuy3XdIoPQKYBAFdzbzSZlSn1KJZUiihQLQC5Znot4SBz1EOTBwQAQ==
 
-use-wallet@^0.13.6:
-  version "0.13.6"
-  resolved "https://registry.yarnpkg.com/use-wallet/-/use-wallet-0.13.6.tgz#4ba24005550943fe6640d4a29fbf7e8bfa8c879b"
-  integrity sha512-GBypStD/y4tqUtWuDG2qhAr8XoTqMzoUybFQmHYOireeprmjqXPKFimhW7OpOZqt1hB21FmDYoGyFUgrbOzpeQ==
+use-wallet@0.13.4:
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/use-wallet/-/use-wallet-0.13.4.tgz#78c8facfdd910a03719ef808043534a8f367c20a"
+  integrity sha512-C5bBobwAKi/SbIX+JzHkxChqU1A2tIcx8fQPoL0gzTGYkqvH97EchnT8yRQGMl2RiICua2nGMLrfa42Yexzs+Q==
   dependencies:
     "@aragon/provided-connector" "^6.0.8"
     "@typescript-eslint/parser" "^4.1.0"
