@@ -1,6 +1,6 @@
+import { Flex } from '@chakra-ui/layout';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { toClasses } from '../utils'
 import { Menu } from './Menu';
 import { MultiChoiceItem } from './MultiChoiceItem';
 
@@ -22,19 +22,14 @@ export const MultiChoiceMenu = ({ title, description, choices, footer }: { title
 
     return (
         <Menu>
-            <div>
-                <div>
-                    <div>{title}</div>
+            <Flex width="100%" backgroundColor='black' color='white' borderRadius='10px' borderWidth="1px">
+                <Flex opacity={'0.7'} fontSize="12px" color='white' margin='auto'>
+                    <Flex marginBottom={"30px"} fontWeight='600' fontSize='24px' lineHeight='30px' textAlign={'center'} color='white'>{title}</Flex>
                     {description && <p>{description}</p>}
-                    <div>{renderChoiceItems()}</div>
-                </div>
-                {footer && (
-                    <>
-                        {footer}
-                    </>
-                )}
-            </div>
-        </Menu>
+                    <Flex marginTop='20px' border='1px solid' boxSizing='border-box' borderRadius='8px'>{renderChoiceItems()}</Flex>
+                </Flex>
+            </Flex>
+        </Menu >
     );
 };
 

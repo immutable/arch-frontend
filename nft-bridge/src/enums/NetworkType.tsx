@@ -6,6 +6,7 @@ export const NetworkType = {
   },
   L2: {
     name: 'StarkNet',
+    tokenName: '',
     symbol: 'STARKNET'
   }
 };

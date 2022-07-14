@@ -11,46 +11,51 @@ import { useLoginTracking } from '../hooks/useTracking';
 import { useWalletHandlerProvider } from '../hooks/useWalletHandlerProvider';
 import { useHideModal } from '../providers/ModalProvider';
 import { useProgressModal } from '../providers/ModalProvider';
-import { useIsL2 } from '../providers/TransferProvider';
-import { useIsL1 } from '../providers/TransferProvider';
-import { useTransfer } from '../providers/TransferProvider';
-import { useWallets } from '../providers/WalletsProvider';
 import { evaluate } from '../utils/object';
 import { isChrome } from '../utils/browser';
-
+import { Box, Flex, Text } from '@chakra-ui/layout';
+import { Button, Image, Img } from '@chakra-ui/react';
+import { AddIcon, Icon } from '@chakra-ui/icons';
+import WalletBalance from '../components/WalletBalance';
+import { useLoginWallet, useWalletsStatus } from '../providers/WalletsProvider';
 const MODAL_TIMEOUT_DURATION = 2000;
 const AUTO_CONNECT_TIMEOUT_DURATION = 100;
 
 export const Login = () => {
-    //const {
-    //     titleTxt,
-    //     subtitleTxt,
-    //     downloadTxt,
-    //     modalTxt,
-    //     unsupportedBrowserTxt,
-    //     unsupportedChainIdTxt
-    // } = useLoginTranslation();
     const [trackLoginScreen, trackDownloadClick, trackWalletClick, trackLoginError] =
         useLoginTracking();
     const { autoConnect, supportedL1ChainId } = useEnvs();
     const [selectedWalletName, setSelectedWalletName] = useState('');
     const [error, setError] = useState<any>(null);
-    const [, swapToL1] = useIsL1();
-    const [, swapToL2] = useIsL2();
-    const { action } = useTransfer();
-    const { status, error: walletError, connectWallet, isConnected } = useWallets();
+    const [network, setNetwork] = useState(NetworkType.L1);
+    const { statusL1, statusL2 } = useWalletsStatus();
+    const { walletError, walletStatus, connectWallet } = useLoginWallet(network);
+    const walletHandlers = useWalletHandlerProvider(network);
     const modalTimeoutId = useRef<any>(null);
     const hideModal = useHideModal();
     const showProgressModal = useProgressModal();
-    const walletHandlers = useWalletHandlerProvider(action);
 
     useEffect((): any => {
         trackLoginScreen();
         if (!isChrome()) {
-            setError({ type: LoginErrorType.UNSUPPORTED_BROWSER, message: 'Your browser is not supported' });
+            setError({ type: LoginErrorType.UNSUPPORTED_BROWSER, message: ('Browser not supported') });
         }
-        return swapToL1;
     }, []);
+
+    useEffect(() => {
+        if (statusL1 !== WalletStatus.CONNECTED) {
+            network !== NetworkType.L1 && setNetwork(NetworkType.L1);
+        } else if (statusL2 !== WalletStatus.CONNECTED) {
+            network !== NetworkType.L2 && setNetwork(NetworkType.L2);
+        }
+    }, [statusL1, statusL2]);
+
+    useEffect(() => {
+        handleModal();
+        return () => {
+            maybeHideModal();
+        };
+    }, [walletStatus]);
 
     useEffect(() => {
         let timeoutId: any;
@@ -68,38 +73,11 @@ export const Login = () => {
     }, [error, walletHandlers]);
 
     useEffect(() => {
-        if (isConnected) {
-            swapToL2;
-        }
-    }, [isConnected]);
-
-    useEffect(() => {
         walletError && handleWalletError(walletError);
     }, [walletError]);
 
-    useEffect(() => {
-        switch (status) {
-            case WalletStatus.CONNECTING:
-                maybeShowModal();
-                break;
-            case WalletStatus.CONNECTED:
-                setSelectedWalletName('');
-                setError(null);
-                maybeHideModal();
-                break;
-            case WalletStatus.ERROR:
-            case WalletStatus.DISCONNECTED:
-                maybeHideModal();
-                break;
-            default:
-                break;
-        }
-        return () => {
-            maybeHideModal();
-        };
-    }, [status]);
-
     const onWalletConnect = (walletHandler: any) => {
+        console.log('onWalletConnect')
         const { config } = walletHandler;
         const { name } = config;
         trackWalletClick(name);
@@ -114,6 +92,25 @@ export const Login = () => {
         trackDownloadClick();
         if (walletHandlers.length > 0) {
             return walletHandlers[0].install();
+        }
+    };
+
+    const handleModal = () => {
+        switch (walletStatus) {
+            case WalletStatus.CONNECTING:
+                maybeShowModal();
+                break;
+            case WalletStatus.CONNECTED:
+                setSelectedWalletName('');
+                setError(null);
+                maybeHideModal();
+                break;
+            case WalletStatus.ERROR:
+            case WalletStatus.DISCONNECTED:
+                maybeHideModal();
+                break;
+            default:
+                break;
         }
     };
 
@@ -148,10 +145,12 @@ export const Login = () => {
             const {
                 config: { id, description, name, logoPath }
             } = walletHandler;
+            // onWalletConnect(walletHandler)
             return {
                 id,
                 description,
                 isDisabled: !isChrome(),
+                isLoading: walletStatus === WalletStatus.CONNECTING,
                 logoPath,
                 name,
                 onClick: () => onWalletConnect(walletHandler)
@@ -159,22 +158,38 @@ export const Login = () => {
         });
     };
 
+    const handleClick = () => {
+        return walletHandlers.map((walletHandler: any) => {
+            onWalletConnect(walletHandler)
+        })
+    }
     return (
-        <div>
+
+        <Flex backgroundColor={"rgb(25, 34, 53)"} height='100%' width={"100%"} borderWidth='0.5px' borderColor={'gray'} flexDir='column' borderRadius='10px' padding='16px' paddingTop={"0px"} >
+            <WalletBalance
+                name="Ethereum"
+                network="ETH"
+                logoURL="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                type="mainnet"
+                address="Connect your wallet "
+                balance='0.001' />
+            < WalletBalance
+                name="Starknet"
+                network="STARKNET"
+                logoURL="https://www.starknet-ecosystem.com/starknet-logo.png"
+                type="testnet"
+                address="Connect your wallet"
+                balance='0.001' />
             <MultiChoiceMenu
                 choices={mapLoginWalletsToChoices()}
-                description={evaluate('While using StarkGate Alpha:', {
-                    networkName:
-                        action === ActionType.TRANSFER_TO_L2 ? NetworkType.L1.name : NetworkType.L2.name
-                })}
+                description={evaluate('While using StarkGate Alpha:', { networkName: network })}
                 error={error}
-                footer={
-                    <div>
-                        {'Don’t have a wallet?'} <span onClick={onDownloadClick}>{'Download Here'}</span>
-                    </div>
-                }
                 title={'Login'}
             />
-        </div>
+            <Flex width='100%' >
+                <Button marginLeft='auto' onClick={() => handleClick()} > Connect your wallet</Button>
+            </Flex>
+        </Flex >
+
     );
 };

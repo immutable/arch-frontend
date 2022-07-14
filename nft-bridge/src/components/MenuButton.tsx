@@ -37,9 +37,12 @@ const MenuButton = ({ menus, text, mainGroupTitle, icon }: MenuButtonProps) => {
 					key={`link-${href}-${index}`}
 					cursor="pointer"
 					href={href}
-					color='black'
+					padding={'25px'}
+					color='white'
+					backgroundColor={"#0E1118"}
+					backgroundSize="cover"
 					as={Flex}
-					_hover={{ opacity: "0.9 !important", transform: "translateY(-2px)" }}
+					_hover={{ opacity: "0.1 !important", transform: "translateY(-2px)", color: '#FFF' }}
 				>
 					{children}
 				</MenuItem >
@@ -47,12 +50,13 @@ const MenuButton = ({ menus, text, mainGroupTitle, icon }: MenuButtonProps) => {
 		});
 	};
 
+	// backgroundImage = { 'https://assets-global.website-files.com/62535c6262b90afd768b9b26/62a94274b999bfc0dfe13f91_gradient-stats.jpg'} backgroundSize = 'cover'
 	return (
 		<ChakraMenu strategy="fixed" autoSelect={false} isLazy id="more-menu-id">
 			{
 				text ? (
-					<ChakraMenuButton p={"25px 30px"} as={Button} backgroundImage={'https://assets-global.website-files.com/62535c6262b90afd768b9b26/62a94274b999bfc0dfe13f91_gradient-stats.jpg'} backgroundSize='cover' >
-						<Text fontSize="15px" as="span" color='black' fontWeight={'500'}>
+					<ChakraMenuButton p={"5px 20px"} as={Button} backgroundColor={'#0E1118'} backgroundSize='cover' borderWidth="1px" borderColor={'#757C8E'}>
+						<Text fontSize="15px" as="span" color='white' fontWeight={'700'}>
 							{text}
 						</Text>
 					</ChakraMenuButton >
@@ -60,8 +64,8 @@ const MenuButton = ({ menus, text, mainGroupTitle, icon }: MenuButtonProps) => {
 					<ChakraMenuButton as={Button} />
 				)
 			}
-			<MenuList backgroundSize={"cover"} marginLeft="10px" backgroundImage={'https://assets-global.website-files.com/62535c6262b90afd768b9b26/62a94274b999bfc0dfe13f91_gradient-stats.jpg'}>
-				< MenuGroup title={mainGroupTitle} color={"black"} >{renderMenus(menus)}</MenuGroup>
+			<MenuList backgroundColor='#0E1118' backgroundSize={"cover"} marginLeft="10px">
+				< MenuGroup title={mainGroupTitle} color="#24D1E9">{renderMenus(menus)}</MenuGroup>
 			</MenuList>
 		</ChakraMenu >
 	);

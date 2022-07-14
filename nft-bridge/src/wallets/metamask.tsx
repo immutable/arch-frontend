@@ -10,12 +10,16 @@ export class MetaMask {
 	}
 
 	isInstalled() {
-		return Boolean(
-			(window as any).ethereum && (window as any).ethereum.isMetaMask
-		);
+		if (typeof window !== "undefined") {
+			return Boolean(
+				(window as any).ethereum && (window as any).ethereum.isMetaMask
+			);
+		}
 	}
 
 	install() {
-		return this.onboarding.startOnboarding();
+		if (typeof window !== "undefined") {
+			return this.onboarding.startOnboarding();
+		}
 	}
 }

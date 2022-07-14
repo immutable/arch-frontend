@@ -1,32 +1,59 @@
 import { useMemo } from 'react';
 
 import Wallets from '../config/Wallets';
-import { ActionType } from '../enums/ActionType';
+import { NetworkType } from '../enums/NetworkType';
 import { GetStarknetWallet, MetaMask } from '../wallets';
+import { WalletHandler } from '../wallets/wallet-handler';
 
-const SUPPORTED_L1_HANDLERS_REGISTRY = {
-    metamask: MetaMask
-};
+// const configMap: any = {
+//     [NetworkType.L1 as any]: {
+//         wallets: Wallets.L1,
+//         registry: {
+//             metamask: MetaMask
+//         }
+//     },
+//     [NetworkType.L2 as any]: {
+//         wallets: Wallets.L2,
+//         registry: {
+//             gsw: GetStarknetWallet
+//         }
+//     }
+// };
 
-const SUPPORTED_L2_HANDLERS_REGISTRY = {
-    gsw: GetStarknetWallet
-};
+const configMapEth: any = {
+    wallets: Wallets.L1,
+    registry: {
+        metamask: MetaMask
+    }
+}
 
-export const useWalletHandlerProvider = (actionType = ActionType.TRANSFER_TO_L2) => {
+const configMapStark: any = {
+    wallets: Wallets.L2,
+    registry: {
+        gsw: GetStarknetWallet
+    }
+
+}
+const networkTreatment = (network: any) => {
+    if (network.name === "Ethereum") {
+        return (configMapEth)
+    }
+    if (network.name === "Starknet") {
+        return (configMapStark)
+    }
+}
+export const useWalletHandlerProvider = (network: any) => {
     return useMemo(() => {
-        const walletsConfig = actionType === ActionType.TRANSFER_TO_L2 ? Wallets.L1 : Wallets.L2;
-        const registry: any =
-            actionType === ActionType.TRANSFER_TO_L2
-                ? SUPPORTED_L1_HANDLERS_REGISTRY
-                : SUPPORTED_L2_HANDLERS_REGISTRY;
-        const handlers: any = [];
-        walletsConfig.forEach(walletConfig => {
-            const { id } = walletConfig;
-            const WalletHandler = registry[id];
-            if (WalletHandler) {
-                handlers.push(new WalletHandler(walletConfig));
-            }
-        });
-        return handlers;
-    }, [actionType]);
+        const { wallets, registry } = networkTreatment(network)
+        return wallets
+            .map((walletConfig: any) => {
+                const { id } = walletConfig;
+                const WalletHandler = registry[id];
+                if (WalletHandler) {
+                    return new WalletHandler(walletConfig);;
+                }
+                return null;
+            })
+        // .filter((walletHandler: any) => walletHandler instanceof WalletHandler);
+    }, [network]);
 };
