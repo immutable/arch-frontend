@@ -9,6 +9,6 @@ For this reason, registering with the bridge currently requires proof of project
 
 Once Project owners have these details, the authentication process can begin. Currently, social authentication is used, for which two forms of authentication must be provided. Examples include Discord, Twitter, Telegram, and Website Domain Ownership.
 
-The process can begin by messaging in the #starknet channel of the Immutable X Discord, after which a member of the Immutable X team will reach out via private messages. Immutable X members maintain discretion and may ask for further proof if the situation demands it.
+The process can begin by messaging in the #starknet channel of the Immutable X Discord (https://discord.gg/immutablex), after which a member of the Immutable X team will reach out via private messages. Immutable X members maintain discretion and may ask for further proof if the situation demands it.
 
 Once sufficient authentication is provided, Immutable X will register your L1 and L2 Token Addresses on the deployed Bridge Registry, after which Token Holders can begin depositing NFTs to L2, thus completing the process.
