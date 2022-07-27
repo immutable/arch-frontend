@@ -1,0 +1,126 @@
+.header {
+    width: 1440px;
+    height: 66px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+    border: solid 3px #444652;
+    background-color: #111217;
+}
+
+.imageA {
+    width: 140px;
+    height: 29px;
+    flex-grow: 0;
+}
+
+.frame1 {
+    height: 66px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+}
+
+.frame3 {
+    cursor: pointer;
+    width: 129px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+
+}
+
+.bridgeTokens {
+    width: 105px;
+    height: 26px;
+    flex-grow: 0;
+    font-family: Rajdhani;
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.44;
+    letter-spacing: normal;
+    text-align: center;
+    color: active;
+
+    &:hover {
+        color: #57c6e4;
+    }
+}
+
+.frame7 {
+    cursor: pointer;
+    width: 136px;
+    height: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 4px;
+
+}
+
+.verifyContract {
+    width: 112px;
+    height: 26px;
+    flex-grow: 0;
+    font-family: Rajdhani;
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.44;
+    letter-spacing: normal;
+    text-align: center;
+
+    &:hover {
+        color: #57c6e4;
+    }
+}
+
+.frame5 {
+    cursor: pointer;
+    width: 59px;
+    height: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+
+.docs {
+    width: 35px;
+    height: 26px;
+    flex-grow: 0;
+    font-family: Rajdhani;
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.44;
+    letter-spacing: normal;
+    text-align: center;
+
+    &:hover {
+        color: #57c6e4;
+    }
+}

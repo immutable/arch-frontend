@@ -5,7 +5,7 @@ import { WalletErrorType } from '../../enums/WalletErrorType';
 import { ChainInfo, ChainType } from '../../enums/ChainType';
 import { useEnvs } from '../../hooks/useEnvs'
 import { getStarknet, getStarknetWallet, resetStarknetWallet } from '../../libs';
-import { useTransfer } from '../TransferProvider';
+import { useIsL1, useTransfer } from '../TransferProvider';
 import { WalletsContext } from './wallets-context';
 import { NetworkType } from '../../enums/NetworkType';
 
@@ -39,9 +39,8 @@ export const useAccountHash = () => {
 
 export const useL1Wallet = () => {
   const wallets = useContext(WalletsContext);
-  //console.log(wallets)
   const connectWallet = useCallback(
-    (walletConfig: any) => console.log(wallets.connectWalletL1(walletConfig)),
+    (walletConfig: any) => wallets.connectWalletL1(walletConfig),
     [wallets]
   );
 

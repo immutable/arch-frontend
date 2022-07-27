@@ -1,25 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { MultiChoiceMenu } from '../components/MultiChoiceMenu';
-import { ActionType } from '../enums/ActionType';
-import { ChainInfo } from '../enums/ChainType';
-import { LoginErrorType } from '../enums/LoginErrorType'
-import { NetworkType } from '../enums/NetworkType';
-import { WalletErrorType } from '../enums/WalletErrorType';
-import { WalletStatus } from '../enums/WalletStatus';
-import { useEnvs } from '../hooks/useEnvs';
-import { useLoginTracking } from '../hooks/useTracking';
-import { useWalletHandlerProvider } from '../hooks/useWalletHandlerProvider';
-import { useHideModal } from '../providers/ModalProvider';
-import { useProgressModal } from '../providers/ModalProvider';
-import { evaluate } from '../utils/object';
-import { isChrome } from '../utils/browser';
-import { Box, Flex, Text } from '@chakra-ui/layout';
-import { Button, Image, Img } from '@chakra-ui/react';
-import { AddIcon, Icon } from '@chakra-ui/icons';
-import WalletBalance from '../components/WalletBalance';
-import { useLoginWallet, useWalletsStatus } from '../providers/WalletsProvider';
+import { ActionType } from '../../enums/ActionType';
+import { ChainInfo } from '../../enums/ChainType';
+import { LoginErrorType } from '../../enums/LoginErrorType'
+import { NetworkType } from '../../enums/NetworkType';
+import { WalletErrorType } from '../../enums/WalletErrorType';
+import { WalletStatus } from '../../enums/WalletStatus';
+import { useEnvs } from '../../hooks/useEnvs';
+import { useLoginTracking } from '../../hooks/useTracking';
+import { useWalletHandlerProvider } from '../../hooks/useWalletHandlerProvider';
+import { useHideModal } from '../../providers/ModalProvider';
+import { useProgressModal } from '../../providers/ModalProvider';
+import { evaluate } from '../../utils/object';
+import { isChrome } from '../../utils/browser';
+import Image from 'next/image';
+import WalletBalance from '../../components/WalletBalance';
+import { useLoginWallet, useWalletsStatus } from '../../providers/WalletsProvider';
 const MODAL_TIMEOUT_DURATION = 2000;
 const AUTO_CONNECT_TIMEOUT_DURATION = 100;
+import styles from './Login.module.scss'
+import starknetLogo from '../../assets/svg/logos/starknet.png'
+import ethLogo from '../../assets/svg/logos/eth.png'
+import ConnectWallet from '../../components/ConnectWallet/ConnectWallet';
+import MetamaskLogo from '../../assets/svg/wallets/metamask.svg'
+import BraavosLogo from '../../assets/svg/wallets/Braavos.svg'
+import ArgentXLogo from '../../assets/svg/wallets/ArgentX.svg'
+import logInLogo from '../../assets/svg/vector/log-in.svg'
 
 export const Login = () => {
     const [trackLoginScreen, trackDownloadClick, trackWalletClick, trackLoginError] =
@@ -163,33 +168,78 @@ export const Login = () => {
             onWalletConnect(walletHandler)
         })
     }
+
+    const ConnectButton = (props: any) => {
+        if (props.name === 'Ethereum') {
+            return (
+                <div className={styles.walletConnectButton} onClick={handleClick}>
+                    <Image src={MetamaskLogo} className={styles.image6}></Image>
+                    <span className={styles.connect}>Connect</span>
+                </div>
+            )
+        }
+        else {
+            return (
+                <>
+                    <div className={styles.walletConnectButton} onClick={() => console.log('done')}>
+                        <Image src={BraavosLogo} className={styles.image6}></Image>
+                        <span className={styles.connect}>Connect</span>
+                        {/* <Image src={logInLogo} className={styles.login}></Image> */}
+                    </div>
+                    <div className={styles.walletConnectButton} onClick={() => console.log('done')} >
+                        <Image src={ArgentXLogo} className={styles.image6}></Image>
+                        <span className={styles.connect}>Connect</span>
+                        {/* <Image src={logInLogo} className={styles.login}></Image> */}
+                    </div>
+                </>
+            )
+
+        }
+    }
+
     return (
 
-        <Flex backgroundColor={"rgb(25, 34, 53)"} height='100%' width={"100%"} borderWidth='0.5px' borderColor={'gray'} flexDir='column' borderRadius='10px' padding='16px' paddingTop={"0px"} >
-            <WalletBalance
-                name="Ethereum"
+        <div className={styles.frame11143}>
+            <ConnectWallet name="Ethereum"
                 network="ETH"
-                logoURL="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                logoURL={ethLogo}
                 type="mainnet"
                 address="Connect your wallet "
-                balance='0.001' />
-            < WalletBalance
-                name="Starknet"
+                balance='0.001'>
+                <ConnectButton name={"Ethereum"} />
+            </ConnectWallet>
+            < ConnectWallet
+                name="StarkNet"
                 network="STARKNET"
-                logoURL="https://www.starknet-ecosystem.com/starknet-logo.png"
-                type="testnet"
+                logoURL={starknetLogo}
+                type="mainnet"
                 address="Connect your wallet"
-                balance='0.001' />
-            <MultiChoiceMenu
-                choices={mapLoginWalletsToChoices()}
-                description={evaluate('While using StarkGate Alpha:', { networkName: network })}
-                error={error}
-                title={'Login'}
-            />
-            <Flex width='100%' >
-                <Button marginLeft='auto' onClick={() => handleClick()} > Connect your wallet</Button>
-            </Flex>
-        </Flex >
+                balance='0.001'>
+                <ConnectButton name={"StarkNet"} />
+            </ConnectWallet>
+
+        </div>
+
+        // <Flex backgroundColor={"rgb(25, 34, 53)"} height='100%' width={"100%"} borderWidth='0.5px' borderColor={'gray'} flexDir='column' borderRadius='10px' padding='16px' paddingTop={"0px"} >
+        //     <WalletBalance
+        //         name="Ethereum"
+        //         network="ETH"
+        //         logoURL="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+        //         type="mainnet"
+        //         address="Connect your wallet "
+        //         balance='0.001' />
+        //     < WalletBalance
+        //         name="Starknet"
+        //         network="STARKNET"
+        //         logoURL="https://www.starknet-ecosystem.com/starknet-logo.png"
+        //         type="testnet"
+        //         address="Connect your wallet"
+        //         balance='0.001' />
+
+        //     <Flex width='100%' >
+        //         <Button marginLeft='auto' onClick={() => handleClick()} > Connect your wallet</Button>
+        //     </Flex>
+        // </Flex >
 
     );
 };
