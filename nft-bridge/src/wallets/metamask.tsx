@@ -1,10 +1,10 @@
 import MetaMaskOnboarding from "@metamask/onboarding";
+import { WalletHandler } from "./wallet-handler";
 
-export class MetaMask {
-	config: any;
-	onboarding: any;
+export class MetaMask extends WalletHandler {
+	onboarding: any
 	constructor(config: any) {
-		this.config = config;
+		super(config)
 		if (typeof window !== "undefined")
 			this.onboarding = new MetaMaskOnboarding();
 	}
@@ -14,6 +14,9 @@ export class MetaMask {
 			return Boolean(
 				(window as any).ethereum && (window as any).ethereum.isMetaMask
 			);
+		}
+		else {
+			return (false)
 		}
 	}
 

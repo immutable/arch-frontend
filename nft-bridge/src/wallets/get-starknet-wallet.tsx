@@ -1,10 +1,8 @@
 import { getStarknet } from 'get-starknet';
-
-export class GetStarknetWallet {
-    config: any;
-
+import { WalletHandler } from "./wallet-handler";
+export class GetStarknetWallet extends WalletHandler {
     constructor(config: any) {
-        this.config = config;
+        super(config)
     }
 
     isInstalled() {

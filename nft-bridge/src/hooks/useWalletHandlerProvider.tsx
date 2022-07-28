@@ -45,6 +45,7 @@ const networkTreatment = (network: any) => {
 export const useWalletHandlerProvider = (network: any) => {
     return useMemo(() => {
         const { wallets, registry } = networkTreatment(network)
+
         return wallets
             .map((walletConfig: any) => {
                 const { id } = walletConfig;
@@ -54,6 +55,6 @@ export const useWalletHandlerProvider = (network: any) => {
                 }
                 return null;
             })
-        // .filter((walletHandler: any) => walletHandler instanceof WalletHandler);
+            .filter((walletHandler: any) => walletHandler instanceof WalletHandler);
     }, [network]);
 };

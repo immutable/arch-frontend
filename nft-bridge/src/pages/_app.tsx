@@ -10,16 +10,19 @@ import "@fontsource/rajdhani"
 import "@fontsource/roboto"
 import { Box } from '@chakra-ui/layout'
 import Bridge from '../routes/Bridge/Bridge'
+import { AppProviders } from '../providers'
 
 const MyApp = () => {
   return (
-    <ChakraProvider>
-      <Box width={'100%'} overflowX="hidden" backgroundColor={"rgb(25, 34, 53)"}>
-        <Header />
-        <Title />
-        <Bridge />
-      </Box>
-    </ChakraProvider >
+    <AppProviders>
+      <ChakraProvider>
+        <Box width={'100%'} overflowX="hidden" backgroundColor={"rgb(25, 34, 53)"}>
+          <Header />
+          <Title />
+          <Bridge />
+        </Box>
+      </ChakraProvider >
+    </AppProviders >
   )
 }
 

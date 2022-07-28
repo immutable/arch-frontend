@@ -39,6 +39,7 @@ export const Login = () => {
     const modalTimeoutId = useRef<any>(null);
     const hideModal = useHideModal();
     const showProgressModal = useProgressModal();
+    console.log(walletHandlers[0])
 
     useEffect((): any => {
         trackLoginScreen();

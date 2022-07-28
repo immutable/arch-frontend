@@ -39,7 +39,6 @@ export const WalletsProvider = ({ children }: { children: any }) => {
 
   const connectWalletL1 = async (walletConfig: any) => {
     const { connectorId } = walletConfig;
-    console.log({ connectorId })
     return walletL1.connect(connectorId).then(() => setWalletConfigL1(walletConfig));
   };
 

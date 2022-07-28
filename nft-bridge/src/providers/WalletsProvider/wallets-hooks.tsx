@@ -151,7 +151,6 @@ export const useStarknetWallet = () => {
 
 export const useLoginWallet = (network: any) => {
   const walletL1 = useL1Wallet();
-  console.log(walletL1)
   const walletL2 = useL2Wallet();
   const { error, status, connectWallet } = network === NetworkType.L1 ? walletL1 : walletL2;
 
