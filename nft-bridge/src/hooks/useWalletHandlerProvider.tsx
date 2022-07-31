@@ -38,7 +38,7 @@ const networkTreatment = (network: any) => {
     if (network.name === "Ethereum") {
         return (configMapEth)
     }
-    if (network.name === "Starknet") {
+    if (network.name === "StarkNet") {
         return (configMapStark)
     }
 }

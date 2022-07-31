@@ -23,7 +23,7 @@ const ConnectWallet = (props: any) => {
             <div className={styles.frame11139}>
                 <div className={styles.frame2}>
                     <div className={styles.ethAddress}>{props.name} Address : </div>
-                    <div className={styles.emAddress}></div>
+                    <div className={styles.emAddress}>{props.address}</div>
                 </div>
                 <div className={styles.eth}> ETH : </div>
 

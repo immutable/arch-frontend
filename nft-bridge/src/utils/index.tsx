@@ -19,8 +19,13 @@ export const formatAddress = (address: string) =>
 export const truncateAddress = (fullAddress: string) => {
     const address = formatAddress(fullAddress)
 
-    const hex = address.slice(0, 3)
-    const end = address.slice(-3)
+    const hex = address.slice(0, 9)
+    const end = address.slice(-15)
+    return `${hex}...${end}`
+}
+export const truncateAddress2 = (fullAddress: string) => {
+    const hex = fullAddress.slice(0, 10)
+    const end = fullAddress.slice(-4)
     return `${hex}...${end}`
 }
 

@@ -9,9 +9,24 @@ import { useIsL1, useTransfer } from '../TransferProvider';
 import { WalletsContext } from './wallets-context';
 import { NetworkType } from '../../enums/NetworkType';
 
+interface IAccountInfo {
+  account: string,
+  balance: number
+}
+export const accountInfo: Record<string, IAccountInfo> = {
+  'L1': {
+    account: '',
+    balance: 0
+  },
+  'L2': {
+    account: '',
+    balance: 0
+  }
+}
 export const useWallets = () => {
   const wallets = useContext(WalletsContext);
   const { isL1 } = useTransfer();
+
 
   const connectWallet = useCallback(
     (walletConfig: any) => {
@@ -152,9 +167,16 @@ export const useStarknetWallet = () => {
 export const useLoginWallet = (network: any) => {
   const walletL1 = useL1Wallet();
   const walletL2 = useL2Wallet();
-  const { error, status, connectWallet } = network === NetworkType.L1 ? walletL1 : walletL2;
+  const { account, error, status, connectWallet } = network === NetworkType.L1 ? walletL1 : walletL2;
+  if (network === NetworkType.L1) {
+    accountInfo.L1.account = account;
+  }
+  else {
+    accountInfo.L2.account = account;
+  }
 
   return {
+    walletAccount: account,
     walletError: error,
     walletStatus: status,
     connectWallet

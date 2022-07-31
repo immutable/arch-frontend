@@ -13,7 +13,7 @@ const BridgeDirectionOption = (props: any) => {
         starknet,
         'Ethereum',
         'Starknet',
-        'WalletConnect'
+        'MetaMask'
     ], [
         starknet,
         ethereum,

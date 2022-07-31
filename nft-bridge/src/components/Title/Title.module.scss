@@ -1,6 +1,5 @@
 .frame2 {
-    width: 1375px;
-    height: 88px;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -11,8 +10,7 @@
 }
 
 .sectionHeading {
-    width: 245px;
-    height: 48px;
+
     flex-grow: 0;
     display: flex;
     flex-direction: column;
@@ -23,8 +21,6 @@
 }
 
 .crossChainBridge {
-    width: 245px;
-    height: 40px;
     font-family: Rajdhani;
     font-size: 32px;
     font-weight: 500;
@@ -37,7 +33,6 @@
 }
 
 .transferYour {
-    height: 32px;
     align-self: stretch;
     flex-grow: 0;
     font-family: Rajdhani;

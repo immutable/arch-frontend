@@ -1,5 +1,4 @@
 .frame7 {
-    height: 664px;
     align-self: stretch;
     flex-grow: 0;
     display: flex;
@@ -14,8 +13,6 @@
 }
 
 .frame11142 {
-    width: 147px;
-    height: 42px;
     flex-grow: 0;
     display: flex;
     flex-direction: row;
@@ -26,8 +23,6 @@
 }
 
 .frame11142bis {
-    width: 99px;
-    height: 42px;
     flex-grow: 0;
     display: flex;
     flex-direction: row;
@@ -47,8 +42,6 @@
 }
 
 .erc721 {
-    width: 51px;
-    height: 26px;
     flex-grow: 0;
     font-family: Rajdhani;
     font-size: 18px;
@@ -67,7 +60,6 @@
 }
 
 .header1 {
-    height: 26px;
     align-self: stretch;
     flex-grow: 0;
     display: flex;
@@ -107,6 +99,7 @@
 .subText4 {
 
     height: 22px;
+    cursor: pointer;
     flex-grow: 1;
     font-family: Roboto;
     font-size: 14px;
@@ -182,8 +175,8 @@
     padding: 0;
 }
 
+
 .bordSub {
-    height: 20px;
     flex-grow: 1;
     font-family: Roboto;
     font-size: 12px;
@@ -264,7 +257,6 @@
 }
 
 .bloc3 {
-    height: 118px;
     align-self: stretch;
     flex-grow: 0;
     display: flex;
@@ -363,4 +355,59 @@
     letter-spacing: normal;
     text-align: left;
     color: #fff;
+}
+
+/* CHECKBOX CUSTOMISATION */
+
+
+.checkboxStyle {
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkboxStyle input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    border-radius: 2px;
+    height: 18px;
+    width: 18px;
+    background-color: #191c26;
+    border: solid 2px #444652;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+.checkboxStyle input:checked~.checkmark {
+    background-color: #57c6e4;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkboxStyle input:checked~.checkmark:after {
+    display: flex;
+}
+
+/* Style the checkmark/indicator */
+.checkboxStyle .checkmark:after {
+    margin-left: 4px;
+    width: 6px;
+    height: 11px;
+    border: solid #444652;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
